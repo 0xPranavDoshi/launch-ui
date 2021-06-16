@@ -1,6 +1,5 @@
 import AvatarIcon from './AvatarIcon'
-import tw from 'twin.macro'
-import { styled } from '../../utils/styled'
+import { styled } from 'solid-styled-components'
 
 export type Color =
   | 'gray'
@@ -19,9 +18,11 @@ export type Color =
   | 'yellow'
   | undefined
 
+export type Shape = 'rounded' | 'square'
+
 export type AvatarProps = {
   avatarType?: 'filled-shadow' | 'filled' | 'outlined' | 'outlined-shadow'
-  shape?: 'rounded' | 'square'
+  shape?: Shape
   color?: Color
   childType?: 'avatar' | 'image' | 'character'
   imagePath?: string
@@ -94,23 +95,23 @@ const StyledDiv = styled('div')(
     shape,
     imageColor,
     shadow,
-  }: AvatarStyledProps) => [
-    // Base styles
-    tw`w-20 h-20 flex justify-center items-center text-base border-solid rounded-full shadow-none`,
-    `
-      background-color: ${backgroundColor};
-      border-width: ${border};
-      border-color: ${borderColor};
-      color: ${imageColor};
-    `,
-
-    shape === 'square' && tw`rounded-3xl`,
-
-    childType === 'character' && tw`text-2xl`,
-
-    shadow === true &&
-      `box-shadow: 0px 2px 4px rgba(18, 17, 17, 0.04), 0px 8px 16px rgba(113, 112, 112, 0.16);`,
-  ]
+  }: AvatarStyledProps) => ({
+    width: '5rem',
+    height: '5rem',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderStyle: 'solid',
+    backgroundColor: backgroundColor,
+    borderWidth: border,
+    borderColor: borderColor,
+    color: imageColor,
+    borderRadius: shape == 'square' ? '1.5rem' : '50%',
+    fontSize: childType == 'character' ? '1.5rem' : '1rem',
+    boxShadow: shadow
+      ? '0px 2px 4px rgba(18, 17, 17, 0.04), 0px 8px 16px rgba(113, 112, 112, 0.16)'
+      : 'none',
+  })
 )
 
 function getImage(

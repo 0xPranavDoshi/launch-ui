@@ -8,7 +8,7 @@ export const Primary = TypeTemplate.bind({})
 Primary.args = {
   avatarType: 'filled',
   shape: 'rounded',
-  color: 'primary',
+  color: 'purple',
   childType: 'avatar',
 }
 
